@@ -21,5 +21,13 @@ If you want to test the provider and see the contents of the ID token you can hi
 - https://stub-oidc-provider.azurewebsites.net/auth?client_id=test_implicit_app&redirect_uri=https://jwt.io&response_type=id_token&scope=openid&nonce=123&state=321&acr_values=Level4
 
 
-### 
-
+### Configuration ###
+The following configuration variables are used and are read from the environment:
+* PORT
+* ISSUER
+* DOMAIN_HINT
+* DEBUG_REQUEST
+* WEBSITE_AUTH_ENABLED
+* STUB_CLIENT_ID (default `stubOidcClient`)
+* STUB_CLIENT_SECRET (default `secretsarehardtokeep`)
+* CALLBACK_URL (default `http://localhost:7000/callback`)
