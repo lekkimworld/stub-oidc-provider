@@ -2,14 +2,17 @@ const store = new Map();
 const uuid = require('uuid/v4');
 
 class Account {
-  constructor(id, principalName) {
+  constructor(id, principalName, givenName, surName) {
     this.pid = id || uuid();
     this.accountUuid = uuid();
     this.principalName = principalName;
     const accountId = this.pid + ':' + principalName;
     this.accountId = accountId;
+    this.surName = surName;
+    this.givenName = givenName;
     if (!store.get(accountId)) {
       store.set(accountId, this);
+      store.set(principalName, this);
     }
   }
 
@@ -23,10 +26,13 @@ class Account {
    */
   async claims(use, scope) { // eslint-disable-line no-unused-vars
     return {
-      sub: this.accountUuid,
+      sub: this.principalName,
       pid: this.pid,
-      locale: 'nb',
-      jti: this.principalName + ':' + this.accountUuid,
+      //locale: 'nb',
+      //jti: this.principalName + ':' + this.accountUuid,
+      "email": this.principalName,
+      "given_name": this.givenName,
+      "sur_name": this.surName
     };
   }
 
