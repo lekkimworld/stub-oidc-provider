@@ -47,7 +47,9 @@ provider.initialize({
         clients,
         keystore: { keys: certificates },
     }).then(() => {
-        provider.proxy = true;
+        if (process.env.USE_HTTPS && process.env.USE_HTTPS === "true") {
+            provider.proxy = true;
+        }
 
         render(provider.app, {
             cache: false,
