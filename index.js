@@ -29,7 +29,6 @@ const DEBUG_REQUEST = process.env.DEBUG_REQUEST || false;
 config.findById = Account.findById;
 
 const provider = new Provider(issuer, config);
-provider.proxy = true;
 provider.defaultHttpOptions = { timeout: 15000 };
 
 function enforceAuthenticationIfEnabled(ctx) {
@@ -48,6 +47,8 @@ provider.initialize({
         clients,
         keystore: { keys: certificates },
     }).then(() => {
+        provider.proxy = true;
+
         render(provider.app, {
             cache: false,
             layout: '_layout',
